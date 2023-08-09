@@ -21,8 +21,8 @@ while True:
             sys.exit()
         if event.type == pygame.KEYDOWN:
             if game.game_over == True:
-                game.restart()
                 game.game_over = False
+                game.restart()
             if event.key == pygame.K_LEFT and game.game_over == False:
                 game.move_left()
             if event.key == pygame.K_RIGHT and game.game_over == False:

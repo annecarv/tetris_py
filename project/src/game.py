@@ -17,7 +17,6 @@ class Game:
     def restart(self):
         self.grid.clear_grid()
         self.score = 0
-        self.lock_block()
 
     def get_random_block(self):
         if len(self.blocks) == 0:
@@ -37,18 +36,19 @@ class Game:
             self.current_block.move(0, -1)
 
     def move_down(self):
-        self.current_block.move(1, 0)
+        if self.game_over == False:
+            self.current_block.move(1, 0)
         if self.block_inside_game_grid() == False or self.block_fits() == False:
                 self.current_block.move(-1, 0)
                 self.lock_block()
-        if self.game_paused == True:
+        if self.game_over == True:
             self.current_block.move(-2, 0)
 
     def pause_game(self):
         self.game_paused = True
 
     def lock_block(self):
-        if self.block_fits() == False:
+        if self.block_fits() == False and self.block_inside_game_grid() == True:
             self.game_over = True
         if self.block_fits() == True:
             tiles = self.current_block.get_cell_positions()
