@@ -13,6 +13,11 @@ class Game:
         self.game_over = False
         self.game_paused = False
         self.score = 0
+        self.rotate_sound = pygame.mixer.Sound("./static/sounds/rotate.ogg")
+        self.clear_sound = pygame.mixer.Sound("./static/sounds/clear.ogg")
+
+        pygame.mixer.music.load("./static/sounds/music.ogg")
+        pygame.mixer.music.play(-1)
 
     def restart(self):
         self.grid.clear_grid()
@@ -56,7 +61,18 @@ class Game:
                 self.grid.grid[position.row][position.column] = self.current_block.id
             self.current_block = self.next_block
             self.next_block = self.get_random_block()
-            self.grid.clear_full_rows()
+            rows_cleared = self.grid.clear_full_rows()
+            self.score_count(rows_cleared)
+
+    def score_count(self, rows_cleared):
+        if rows_cleared == 0:
+            self.score += 1
+        elif rows_cleared == 1:
+            self.score += 100
+        elif rows_cleared == 2:
+            self.score += 300
+        elif rows_cleared >= 3:
+            self.score += 500
 
     def block_fits(self):
         tiles = self.current_block.get_cell_positions()

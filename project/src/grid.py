@@ -51,6 +51,7 @@ class Grid:
             self.grid[row+num_rows][column] = self.grid[row][column]
             self.grid[row][column] = 0
 
+    #Limpa a linha mas tb nao entendi
     def clear_full_rows(self):
         completed = 0
         for row in range(self.num_rows-1, 0, -1):
@@ -60,13 +61,14 @@ class Grid:
             elif completed > 0:
                 self.move_row_down(row, completed)
         return completed
+
     #Desenha o retangulo do jogo com suas respectivas linhas e colunas formando as grades
     def draw(self, screen):
         for row in range(self.num_rows):
             for column in range(self.num_cols):
                 cell_value = self.grid[row][column]
                 #cell_rect = pygame.Rect(x, y, w, h)
-                cell_rect = pygame.Rect(column*self.cell_size + 1, row*self.cell_size + 1,
+                cell_rect = pygame.Rect(column*self.cell_size + 11, row*self.cell_size + 11,
                 self.cell_size - 1, self.cell_size - 1)
                 #pygame.draw.rect(surface, color, rect)
                 pygame.draw.rect(screen, self.colors[cell_value], cell_rect)
