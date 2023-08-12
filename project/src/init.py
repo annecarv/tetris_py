@@ -42,7 +42,8 @@ while True:
                 game.move_down()
     #Drawing
     score_value_surface = title_font.render(str(game.score), True, Colors.white)
-
+    
+    
     screen.fill(Colors.dark_blue)
 
     screen.blit(score_surface, (360, 10, 50, 50))
